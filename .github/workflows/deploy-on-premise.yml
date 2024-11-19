@@ -1,0 +1,89 @@
+name: Deploy Docker Package
+
+on:
+  push:
+    branches:
+      - main # Changing the branch here would also work
+    paths-ignore:
+      - 'readme.md'
+      - 'contributing.md'
+      - 'CHANGELOG.md'
+      - 'LICENSE'
+      - 'docs/**'
+      - '.gitignore'
+env:
+  env: production
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+defaults:
+  run:
+    shell: bash
+
+permissions: write-all
+
+jobs:
+  deploy_packages:
+    runs-on: ubuntu-latest
+    name: Deploy Docker Package
+    steps:
+         - uses: actions/checkout@v4
+          
+         - name: Log in to the Container registry
+           uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+           with:
+             registry: ${{ env.REGISTRY }}
+             username: ${{ github.actor }}
+             password: ${{ secrets.GITHUB_TOKEN }}
+        
+         - name: Extract metadata (tags, labels) for Docker
+           id: meta
+           uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+           with:
+             images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+    
+         - name: Build and push Docker image
+           id: push
+           uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+           with:
+             context: .
+             push: true
+             tags: ${{ steps.meta.outputs.tags }}
+             labels: ${{ steps.meta.outputs.labels }}
+
+         - name: Save Docker Image Metadata
+           id: image-metadata
+           run: echo "tags=${{ steps.meta.outputs.tags }}" >> $GITHUB_ENV
+
+
+        # Need to make repo public or upgrade billing plan to enable this
+        #  - name: Generate artifact attestation
+        #    uses: actions/attest-build-provenance@v1
+        #    with:
+        #      subject-name: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME}}
+        #      subject-digest: ${{ steps.push.outputs.digest }}
+        #      push-to-registry: true
+        # # Create a new tag and release
+        # - name: Create Tag
+        #   id: create_tag
+        #   uses: jaywcjlove/create-tag-action@main
+        #   with:
+        #     package-path: ./package.json
+
+        # - name: Generate Changelog
+        #   id: changelog
+        #   uses: jaywcjlove/changelog-generator@main
+        #   if: steps.create_tag.outputs.successful
+        #   with:
+        #     head-ref: ${{steps.create_tag.outputs.version}}
+
+        # - name: Create Release
+        #   uses: ncipollo/release-action@v1
+        #   if: steps.create_tag.outputs.successful
+        #   with:
+        #     token: ${{ secrets.GITHUB_TOKEN }}
+        #     name: ${{ steps.create_tag.outputs.version }}
+        #     tag: ${{ steps.create_tag.outputs.version }}
+        #     body: |
+        #       ${{ steps.changelog.outputs.compareurl }}
+        #       ${{ steps.changelog.outputs.changelog }}
