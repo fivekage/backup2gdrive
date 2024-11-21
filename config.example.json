@@ -1,0 +1,17 @@
+{
+   "projectName": "string",
+   "pathsToBackup": [
+      {
+         "folderPath": "string",
+         "filterFile": "regex",
+         "zipName": "string"
+      },
+      {
+         "folderPath": "string",
+         "filterFile": "regex",
+         "zipName": "string",
+         "gDriveDestinationPath": "string"
+      }
+   ],
+   "gDriveDestinationPath": "string"
+}

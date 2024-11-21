@@ -9,6 +9,8 @@ If you want to help with the project, please fork the repository and create a pu
 ### Requirements
 
 - Python 3.12
+- Create a config.json file using config.example.json
+- Create a .env file using .env.example
 
 
 ### Create a virtual environment and install the requirements:
