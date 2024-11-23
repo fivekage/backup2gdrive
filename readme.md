@@ -27,6 +27,20 @@ services:
          - /path/to/data:/data
 ```
 
+# Example inputs data
+
+You can find example inputs data in `config.example.json` and `.env.example`
+
+If you are using Windows, you have to define your config like this to avoid errors on '\\' characters: 
+
+```json
+{
+   "folderPath": "C:\\Users\\sm\\Desktop\\dev\\backup2gdrive\\backups\\",
+   "filterFile": ".*\\.md$",
+   "zipName": "docs"
+},
+```
+
 # Contributing
 
 See [CONTRIBUTING.md](CONTRIBUTING.md)

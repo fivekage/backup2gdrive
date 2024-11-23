@@ -15,7 +15,7 @@ def validate_filename(filename: str) -> bool:
    bool
        True if the filename is valid, False otherwise.
    """
-   return isinstance(filename, str) and filename != os.path.basename(filename) or any(c in filename for c in r'<>:"/\|?*')
+   return isinstance(filename, str) and not any(c in filename for c in r'<>:"/\|?*')
    
 
 def validate_regex(regex: str) -> bool:
@@ -52,4 +52,5 @@ def validate_path(path: str) -> bool:
    bool
        True if the path is valid, False otherwise.
    """
-   return isinstance(path, str) and re.match(r'^(.+)\/([^\/]+)$', path) is not None
+   REGEX_PATH_MULTI_OS = r'^(?:[a-zA-Z]:[\\/]|[\\/])?(?:[^<>:|?*\r\n]+[\\/])*[^<>:|?*\r\n]*[\\/]?$'
+   return isinstance(path, str) and re.match(REGEX_PATH_MULTI_OS, path) is not None
