@@ -1,5 +1,5 @@
 ---
-name: Doc sample issue
+name: Bug
 about: Create an issue to help us improve
 
 ---
