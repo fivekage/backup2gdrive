@@ -1,0 +1,23 @@
+{
+   "projectName": "projectName",
+   "usersEmails": ["me@gmail.com", "myfriend@gmail.com"],
+   "daysToKeep": 7,
+   "pathsToBackup": [
+      {
+         "folderPath": "C:\\Users\\test\\myservice\\backups\\",
+         "filterFile": ".*\\.md$",
+         "zipName": "docs"
+      },
+      {
+         "folderPath": "/var/mysql/backups/",
+         "filterFile": ".*\\.bak$",
+         "zipName": "mysql"
+      },
+      {
+         "folderPath": "/var/mysql/backups/",
+         "filterFile": "(samy|hocem).save$",
+         "zipName": "save_hocem_and_samy"
+      }
+   ],
+   "gDriveDestinationPath": "string"
+}

@@ -2,6 +2,11 @@
 config.json
 .env
 backups/**/*
+venv-backup2gdrive/**/*
+
+# All in config/ except config.example.json
+config/*
+!config/config.example.json
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
