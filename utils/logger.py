@@ -6,12 +6,13 @@ from logging.handlers import RotatingFileHandler
 # Singleton instance for the logger
 _logger_instance: Logger | None = None
 
+
 def setup_logger(
     name: str = "app_logger",
     log_file: str = "logs/app.log",
     level: int = logging.INFO,
     max_bytes: int = 5 * 1024 * 1024,
-    backup_count: int = 3
+    backup_count: int = 3,
 ) -> Logger:
     """
     Sets up and returns a singleton logger instance.
@@ -41,7 +42,7 @@ def setup_logger(
     # Formatter for log messages
     formatter: logging.Formatter = logging.Formatter(
         fmt="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
-        datefmt="%Y-%m-%d %H:%M:%S"
+        datefmt="%Y-%m-%d %H:%M:%S",
     )
 
     # Console handler
@@ -63,6 +64,7 @@ def setup_logger(
 
     _logger_instance = logger  # Cache the logger instance
     return logger
+
 
 def get_logger(name: str = "app_logger") -> Logger:
     """

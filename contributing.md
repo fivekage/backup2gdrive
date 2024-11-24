@@ -9,7 +9,7 @@ If you want to help with the project, please fork the repository and create a pu
 ### Requirements
 
 - Python 3.12
-- Create a config.json file using config.example.json
+- Create a config.json file into ./config folder using config.example.json
 - Create a .env file using .env.example
 
 
@@ -21,7 +21,14 @@ https://code.visualstudio.com/docs/python/python-tutorial
 
 #### Using Terminal
 ```bash
-python3 -m venv venv
-source venv/bin/activate
+python3 -m venv venv-backup2gdrive # Optional to create a virtual environment
+source venv/bin/activate # Activate the virtual environment
+pip install -r requirements.txt # Install the requirements
+```
+
+
+#### Install requirements:
+
+```bash
 pip install -r requirements.txt
 ```
