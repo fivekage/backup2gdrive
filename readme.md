@@ -39,6 +39,7 @@ services:
          - /path/to/logs:/logs
          - /path/to/config:/config
 ```
+> To find an example docker compose file, see `docker-compose.yml`
 
 **Backups will be shared with mail address you defined in the config file**
 **Once the process is finished, connect to your GDrive account and go to "Shared with me" to see the backup folder**
