@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  backup2gdrive:
+    build:
+      context: .
+    #image: gchr.io/fivekage/backup2gdrive:latest
+    container_name: backup2gdrive
+    restart: no
+    env_file: 
+      - .env # Path to your environment variables file
+    volumes:
+      - ./config:/app/config
+      - ./logs:/app/logs            
+      - ./backups:/backups
