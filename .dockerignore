@@ -3,4 +3,5 @@ sonar.properties
 LICENSE
 contributing.md
 docs/
+config/
 .gitignore
